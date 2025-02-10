@@ -6,5 +6,9 @@ export let eggs = #{
         targets: "~/.config/i3",
         templates: ["config"],
         enabled: true,
+    },
+    nvim: #{
+        targets: "~/.config/nvim",
+        enabled: true,
     }
 };
