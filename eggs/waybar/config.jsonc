@@ -1,0 +1,161 @@
+{
+  "layer": "top",
+  "margin-left": 15,
+  "margin-right": 15,
+  "spacing": 4,
+  "modules-left": [
+    "hyprland/workspaces",
+    "custom/media",
+    "custom/hyprland-window"
+  ],
+  "modules-right": [
+    "privacy",
+    "pulseaudio",
+    "group/hardware",
+    "clock",
+    "tray",
+    "group/power#group-power"
+  ],
+  "group/hardware": {
+    "orientation": "inherit",
+    "click-to-reveal": true,
+    "drawer": {
+      "transition-duration": 500,
+      "children-class": "group-hardware-item",
+      "transition-left-to-right": false
+    },
+    "modules": ["memory", "network", "cpu"]
+  },
+  "group/power#group-power": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 500,
+      "children-class": "group-power-item",
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "custom/shutdown",
+      "custom/lock",
+      "custom/logout",
+      "custom/reboot"
+    ]
+  },
+  "custom/logout": {
+    "format": "󰗼",
+    "tooltip": false,
+    "on-click": "hyprctl dispatch exit"
+  },
+  "custom/lock": {
+    "format": "󰍁",
+    "tooltip": false,
+    "on-click": "swaylock"
+  },
+  "custom/reboot": {
+    "format": "󰜉",
+    "tooltip": false,
+    "on-click": "reboot"
+  },
+  "custom/shutdown": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "shutdown now"
+  },
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-scroll-up": "hyprctl dispatch workspace e-1",
+    "on-scroll-down": "hyprctl dispatch workspace e+1",
+    "on-click": "activate",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": "",
+      "urgent": "",
+      "focused": "",
+      "default": ""
+    },
+    "sort-by-number": true
+  },
+  "custom/hyprland-window": {
+    "escape": true,
+    "exec": "$HOME/.config/waybar/modules/hyprland-window.py 2> /dev/null",
+    "return-type": "json",
+    "max-length": 40
+  },
+  "privacy": {
+    "icon-spacing": 4,
+    "icon-size": 14,
+    "transition-duration": 250,
+    "modules": [
+      {
+        "type": "screenshare",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      },
+      {
+        "type": "audio-out",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      },
+      {
+        "type": "audio-in",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      }
+    ]
+  },
+  "tray": {
+    "spacing": 10
+  },
+  "clock": {
+    "timezone": "Asia/Dhaka",
+    "format": "  {:%H:%M  %d-%m-%Y} ",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+  "cpu": {
+    "format": "{usage}%  "
+  },
+  "memory": {
+    "format": "{}%  "
+  },
+  "network": {
+    "format-wifi": "{essid} ({signalStrength}%)  ",
+    "format-ethernet": "{ipaddr}/{cidr} 󰩠 ",
+    "format-linked": "{ifname} (No IP) 󰛳1 ",
+    "format-disconnected": "Disconnected 󰲛 ",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}",
+    "tooltip-format": "{ifname} via {gwaddr}"
+  },
+  "pulseaudio": {
+    "scroll-step": 2, // %, can be a float
+    "format": "{volume}% {icon}",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""]
+    },
+    "on-click": "pamixer -t",
+    "on-click-right": ""
+  },
+  "custom/media": {
+    "format": "{icon} {0}",
+    "return-type": "json",
+    "max-length": 40,
+    "format-icons": {
+      "spotify": "",
+      "chromium": "",
+      "default": "🎜"
+    },
+    "escape": true,
+    "exec": "$HOME/.config/waybar/modules/mediaplayer.py 2> /dev/null",
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl stop",
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous"
+  }
+}

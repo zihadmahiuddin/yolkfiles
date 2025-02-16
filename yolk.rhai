@@ -14,5 +14,9 @@ export let eggs = #{
     nvim: #{
         targets: "~/.config/nvim",
         enabled: true,
+    },
+    waybar: #{
+        targets: "~/.config/waybar",
+        enabled: true,
     }
 };
