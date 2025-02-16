@@ -11,6 +11,10 @@ export let eggs = #{
         targets: "~/.config/hypr",
         enabled: true,
     },
+    kitty: #{
+        targets: "~/.config/kitty",
+        enabled: true,
+    },
     nvim: #{
         targets: "~/.config/nvim",
         enabled: true,
