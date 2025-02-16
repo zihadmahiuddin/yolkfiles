@@ -23,6 +23,13 @@ export let eggs = #{
         targets: "~/.config/nvim",
         enabled: true,
     },
+    otd: #{
+        targets: #{
+            "settings.json": "~/.config/OpenTabletDriver/settings.json",
+            "Presets": "~/.config/OpenTabletDriver/Presets",
+        },
+        enabled: true,
+    },
     paru: #{
         targets: "~/.config/paru",
         enabled: true,
