@@ -2,6 +2,10 @@ export let data = #{
 };
 
 export let eggs = #{
+    dunst: #{
+        targets: "~/.config/dunst",
+        enabled: true,
+    },
     i3: #{
         targets: "~/.config/i3",
         templates: ["config"],
