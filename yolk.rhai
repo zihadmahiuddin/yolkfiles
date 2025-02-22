@@ -34,6 +34,12 @@ export let eggs = #{
         targets: "~/.config/paru",
         enabled: true,
     },
+    tmux: #{
+        targets: #{
+            ".tmux.conf": "~/.tmux.conf",
+        },
+        enabled: true,
+    },
     waybar: #{
         targets: "~/.config/waybar",
         enabled: true,
