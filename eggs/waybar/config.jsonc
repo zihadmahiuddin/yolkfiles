@@ -9,9 +9,9 @@
     "custom/hyprland-window"
   ],
   "modules-right": [
+    "group/hardware",
     "privacy",
     "pulseaudio",
-    "group/hardware",
     "clock",
     "tray",
     "group/power#group-power"
