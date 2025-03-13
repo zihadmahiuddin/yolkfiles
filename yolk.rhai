@@ -11,6 +11,12 @@ export let eggs = #{
         templates: ["config"],
         enabled: true,
     },
+    git: #{
+        targets: #{
+          ".gitconfig": "~/.gitconfig"
+        },
+        enabled: true,
+    },
     hypr: #{
         targets: "~/.config/hypr",
         enabled: true,

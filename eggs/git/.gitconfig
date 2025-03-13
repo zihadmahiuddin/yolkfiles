@@ -1,0 +1,12 @@
+[user]
+	email = zihadmahiuddin@gmail.com
+	name = Zihad
+  signingkey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILcVH8aHNDVPUADwzQWA5DYgLvpFUezy4eMWtOO8Oopi zihad@sora
+[gpg]
+    format = ssh
+[init]
+	defaultBranch = main
+[commit]
+	gpgsign = true
+[alias]
+  quickserve = daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/
