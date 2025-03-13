@@ -143,14 +143,9 @@
     "on-click-right": ""
   },
   "custom/media": {
-    "format": "{icon} {0}",
+    "format": "{0}",
     "return-type": "json",
     "max-length": 40,
-    "format-icons": {
-      "spotify": "",
-      "chromium": "",
-      "default": "🎜"
-    },
     "escape": true,
     "exec": "$HOME/.config/waybar/modules/mediaplayer.py 2> /dev/null",
     "on-click": "playerctl play-pause",
