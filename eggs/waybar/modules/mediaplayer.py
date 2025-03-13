@@ -113,6 +113,8 @@ class PlayerManager:
         player_name = player.props.player_name
         artist = player.get_artist()
         title = player.get_title()
+        if not title:
+            return
         title = title.replace("&", "&amp;")
 
         track_info = ""
