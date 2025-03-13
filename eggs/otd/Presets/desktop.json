@@ -3,7 +3,7 @@
     {
       "Tablet": "VEIKK S640 V2",
       "OutputMode": {
-        "Path": "OpenTabletDriver.Desktop.Output.LinuxArtistMode",
+        "Path": "OpenTabletDriver.Desktop.Output.AbsoluteMode",
         "Settings": [],
         "Enable": true
       },
@@ -97,11 +97,11 @@
       "Bindings": {
         "TipActivationThreshold": 0.0,
         "TipButton": {
-          "Path": "VoiDPlugins.OutputMode.WindowsInkButtonHandler",
+          "Path": "OpenTabletDriver.Desktop.Binding.MouseBinding",
           "Settings": [
             {
               "Property": "Button",
-              "Value": "Pen Tip"
+              "Value": "Left"
             }
           ],
           "Enable": true
