@@ -18,7 +18,7 @@ window#waybar {
 #pulseaudio,
 #workspaces,
 #privacy,
-#custom-hyprland-window,
+#window,
 #custom-media,
 .group-power {
   background-color: @surface0;
@@ -54,11 +54,11 @@ window#waybar {
   border-radius: 1rem;
 }
 
-#custom-hyprland-window {
+#window {
   color: @subtext0;
 }
 
-#custom-hyprland-window-empty {
+window#waybar.empty #window {
   background: transparent;
   color: transparent;
 }
