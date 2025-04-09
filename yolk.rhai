@@ -25,6 +25,10 @@ export let eggs = #{
         targets: "~/.config/kitty",
         enabled: true,
     },
+    niri: #{
+        targets: "~/.config/niri",
+        enabled: true,
+    },
     nvim: #{
         targets: "~/.config/nvim",
         enabled: true,

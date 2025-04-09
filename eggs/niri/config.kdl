@@ -1,0 +1,323 @@
+layout {
+    gaps 12
+    center-focused-column "never"
+    // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
+    preset-column-widths {
+        // Proportion sets the width as a fraction of the output width, taking gaps into account.
+        // For example, you can perfectly fit four windows sized "proportion 0.25" on an output.
+        // The default preset widths are 1/3, 1/2 and 2/3 of the output.
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    default-column-width { proportion 1.0; }
+
+    focus-ring {
+        width 2
+        active-gradient from="#80c8ff" to="#bbddff" angle=45
+        inactive-gradient from="#505050" to="#808080" angle=45
+    }
+
+    shadow {
+      on
+    }
+}
+
+binds {
+    // Keys consist of modifiers separated by + signs, followed by an XKB key name
+    // in the end. To find an XKB name for a particular key, you may use a program
+    // like wev.
+    //
+    // "Mod" is a special modifier equal to Super when running on a TTY, and to Alt
+    // when running as a winit window.
+    //
+    // Most actions that you can bind here can also be invoked programmatically with
+    // `niri msg action do-something`.
+
+    // Mod-Shift-/, which is usually the same as Mod-?,
+    // shows a list of important hotkeys.
+    Mod+Shift+Slash { show-hotkey-overlay; }
+
+    Mod+Return hotkey-overlay-title="Open Terminal" { spawn "kitty"; }
+    Mod+Shift+Return hotkey-overlay-title="Open Floating Terminal" { spawn "kitty" "--class" "float-kitty"; }
+    Mod+D hotkey-overlay-title="Open App Launcher" { spawn "rofi" "-show" "drun"; }
+    Mod+Alt+L hotkey-overlay-title="Lock Screen" { spawn "bash" "-c" "$HOME/.config/waybar/scripts/swaylock.sh"; }
+
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
+    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+
+    Mod+Q { close-window; }
+
+    Mod+H     { focus-column-left; }
+    Mod+J     { focus-window-or-workspace-down; }
+    Mod+K     { focus-window-or-workspace-up; }
+    Mod+L     { focus-column-right; }
+
+    Mod+Ctrl+H     { move-column-left; }
+    Mod+Ctrl+J     { move-window-down-or-to-workspace-down; }
+    Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
+    Mod+Ctrl+L     { move-column-right; }
+
+    Mod+Home { focus-column-first; }
+    Mod+End  { focus-column-last; }
+    Mod+Ctrl+Home { move-column-to-first; }
+    Mod+Ctrl+End  { move-column-to-last; }
+
+    // Mod+Shift+Left  { focus-monitor-left; }
+    // Mod+Shift+Down  { focus-monitor-down; }
+    // Mod+Shift+Up    { focus-monitor-up; }
+    // Mod+Shift+Right { focus-monitor-right; }
+    // Mod+Shift+H     { focus-monitor-left; }
+    // Mod+Shift+J     { focus-monitor-down; }
+    // Mod+Shift+K     { focus-monitor-up; }
+    // Mod+Shift+L     { focus-monitor-right; }
+
+    // Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
+    // Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
+    // Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
+    // Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+    // Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
+    // Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
+    // Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
+    // Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
+
+    // Alternatively, there are commands to move just a single window:
+    // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
+    // ...
+
+    // And you can also move a whole workspace to another monitor:
+    // Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
+    // ...
+
+    Mod+I              { focus-workspace-down; }
+    Mod+U              { focus-workspace-up; }
+    Mod+Ctrl+I         { move-column-to-workspace-down; }
+    Mod+Ctrl+U         { move-column-to-workspace-up; }
+
+    // Alternatively, there are commands to move just a single window:
+    // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
+    // ...
+
+    Mod+Shift+I         { move-workspace-down; }
+    Mod+Shift+U         { move-workspace-up; }
+
+    // You can bind mouse wheel scroll ticks using the following syntax.
+    // These binds will change direction based on the natural-scroll setting.
+    //
+    // To avoid scrolling through workspaces really fast, you can use
+    // the cooldown-ms property. The bind will be rate-limited to this value.
+    // You can set a cooldown on any bind, but it's most useful for the wheel.
+    Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+    Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
+    Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
+
+    Mod+WheelScrollRight      { focus-column-right; }
+    Mod+WheelScrollLeft       { focus-column-left; }
+    Mod+Ctrl+WheelScrollRight { move-column-right; }
+    Mod+Ctrl+WheelScrollLeft  { move-column-left; }
+
+    // Usually scrolling up and down with Shift in applications results in
+    // horizontal scrolling; these binds replicate that.
+    Mod+Shift+WheelScrollDown      { focus-column-right; }
+    Mod+Shift+WheelScrollUp        { focus-column-left; }
+    Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
+    Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
+
+    Mod+1 { focus-workspace "terminal"; }
+    Mod+2 { focus-workspace "web"; }
+    Mod+3 { focus-workspace "code"; }
+    Mod+4 { focus-workspace "social"; }
+    Mod+5 { focus-workspace "media"; }
+    Mod+6 { focus-workspace "scratchpad"; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+    Mod+0 { focus-workspace 10; }
+    Mod+Shift+1 { move-column-to-workspace "terminal"; }
+    Mod+Shift+2 { move-column-to-workspace "web"; }
+    Mod+Shift+3 { move-column-to-workspace "code"; }
+    Mod+Shift+4 { move-column-to-workspace "social"; }
+    Mod+Shift+5 { move-column-to-workspace "media"; }
+    Mod+Shift+6 { move-column-to-workspace "scratchpad"; }
+    Mod+Shift+7 { move-column-to-workspace 7; }
+    Mod+Shift+8 { move-column-to-workspace 8; }
+    Mod+Shift+9 { move-column-to-workspace 9; }
+    Mod+Shift+0 { move-column-to-workspace 10; }
+
+    // Switches focus between the current and the previous workspace.
+    Alt+Tab { focus-workspace-previous; }
+
+    Mod+Tab hotkey-overlay-title=null { spawn "bash" "-c" "~/.config/waybar/scripts/niri/scroll-workspace.py next"; }
+    Mod+Shift+Tab hotkey-overlay-title=null { spawn "bash" "-c" "~/.config/waybar/scripts/niri/scroll-workspace.py prev"; }
+
+    // Toggle normal and tabbed display
+    Mod+T { toggle-column-tabbed-display; }
+
+    // The following binds move the focused window in and out of a column.
+    // If the window is alone, they will consume it into the nearby column to the side.
+    // If the window is already in a column, they will expel it out.
+    Mod+BracketLeft  { consume-or-expel-window-left; }
+    Mod+BracketRight { consume-or-expel-window-right; }
+
+    // Consume one window from the right to the bottom of the focused column.
+    Mod+Comma  { consume-window-into-column; }
+    // Expel the bottom window from the focused column to the right.
+    Mod+Period { expel-window-from-column; }
+
+    Mod+R { switch-preset-column-width; }
+    Mod+Shift+R { switch-preset-window-height; }
+    Mod+Ctrl+R { reset-window-height; }
+    Mod+Shift+F { maximize-column; }
+    Mod+F { fullscreen-window; }
+    Mod+C { center-column; }
+
+    // Finer width adjustments.
+    // This command can also:
+    // * set width in pixels: "1000"
+    // * adjust width in pixels: "-5" or "+5"
+    // * set width as a percentage of screen width: "25%"
+    // * adjust width as a percentage of screen width: "-10%" or "+10%"
+    // Pixel sizes use logical, or scaled, pixels. I.e. on an output with scale 2.0,
+    // set-column-width "100" will make the column occupy 200 physical screen pixels.
+    Mod+Minus { set-column-width "-10%"; }
+    Mod+Equal { set-column-width "+10%"; }
+
+    // Finer height adjustments when in column with other windows.
+    Mod+Shift+Minus { set-window-height "-10%"; }
+    Mod+Shift+Equal { set-window-height "+10%"; }
+
+    // Move the focused window between the floating and the tiling layout.
+    Mod+Space       { toggle-window-floating; }
+    Mod+Shift+Space { switch-focus-between-floating-and-tiling; }
+
+    Print { screenshot; }
+    Ctrl+Print { screenshot-screen; }
+    Alt+Print { screenshot-window; }
+
+    Mod+Ctrl+Shift+Q { quit; }
+
+    // Powers off the monitors. To turn them back on, do any input like
+    // moving the mouse or pressing any other key.
+    Mod+Shift+P { power-off-monitors; }
+}
+
+workspace "terminal" {}
+
+workspace "web" {}
+
+workspace "code" {}
+
+workspace "social" {}
+
+workspace "media" {}
+
+workspace "scratchpad" {}
+
+window-rule {
+    geometry-corner-radius 4
+    clip-to-geometry true
+}
+
+// Indicate screencasted windows with red colors.
+window-rule {
+    match is-window-cast-target=true
+
+    focus-ring {
+        active-color "#f38ba8"
+        inactive-color "#7d0d2d"
+    }
+
+    border {
+        inactive-color "#7d0d2d"
+    }
+
+    shadow {
+        color "#7d0d2d70"
+    }
+
+    tab-indicator {
+        active-color "#f38ba8"
+        inactive-color "#7d0d2d"
+    }
+}
+
+// Block out sensitive windows from screen capture.
+window-rule {
+    match app-id=r#"^(Bitwarden|discord)$"#
+    block-out-from "screencast"
+}
+
+window-rule {
+  match app-id=r#"^kitty(.*)$"#
+  open-on-workspace "terminal"
+}
+
+window-rule {
+  match app-id=r#"^(Brave-browser|Google-chrome|google-chrome|zen)(.*)$"#
+  open-on-workspace "web"
+}
+
+window-rule {
+  match app-id=r#"^(Code|code|jetbrains-*)(.*)$"#
+  open-on-workspace "code"
+}
+
+window-rule {
+  match app-id=r#"^discord(.*)$"#
+  open-on-workspace "social"
+}
+
+window-rule {
+  match app-id=r#"^(mpv|Viewnior)(.*)$"#
+  open-on-workspace "media"
+}
+
+window-rule {
+  match app-id=r#"^(csgo_linux64|osu!|Minecraft)(.*)$"#
+  open-on-workspace "media"
+  open-fullscreen true
+}
+
+window-rule {
+  match app-id=r#"^(PrismLauncher|Spotify)(.*)$"#
+  open-on-workspace "scratchpad"
+}
+
+window-rule {
+  match app-id=r#"^(mpv|Bitwarden|float-|com.github.hluk.copyq)(.*)$"#
+  open-floating true
+}
+
+window-rule {
+  match app-id=r#"osu.Game.Tests"#
+  match title=r#"^osu! \(development\)$"#
+  open-on-workspace "code"
+  open-maximized false
+  open-fullscreen false
+  open-floating false
+
+
+  default-column-width { proportion 0.5; }
+}
+
+clipboard {
+    disable-primary
+}
+
+environment {
+    DISPLAY ":0"
+}
+
+spawn-at-startup "xwayland-satellite"
+spawn-at-startup "dex -a"
+spawn-at-startup "waybar"
+spawn-at-startup "swww-daemon"
+
+prefer-no-csd
+
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
