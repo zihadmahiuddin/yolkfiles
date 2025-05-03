@@ -29,9 +29,13 @@ export let eggs = #{
         targets: "~/.config/niri",
         enabled: true,
     },
-    nvim: #{
+    lazyvim: #{
         targets: "~/.config/nvim",
         enabled: true,
+    },
+    nvim: #{
+        targets: "~/.config/nvim",
+        enabled: false,
     },
     otd: #{
         targets: #{
