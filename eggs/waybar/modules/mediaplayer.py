@@ -115,7 +115,6 @@ class PlayerManager:
         title = player.get_title()
         if not title:
             return
-        title = title.replace("&", "&amp;")
 
         track_info = ""
         if player_name == "spotify" and "mpris:trackid" in metadata.keys() and ":ad:" in player.props.metadata["mpris:trackid"]:
